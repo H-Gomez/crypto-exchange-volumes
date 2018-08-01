@@ -21,7 +21,6 @@ function AddVolumesToDatabase(array) {
             var db = client.db('exchanges');
             var collection = db.collection('tradeVolumes');           
             array.forEach(function(item) {
-                //console.log('trying.... ' + item.name);
                 collection.insert(item, function(error, inserted) {
                     if (error) {
                         console.log(error);
@@ -30,6 +29,8 @@ function AddVolumesToDatabase(array) {
                     }
                 });
             });
+
+            return;
         }
     });
 }
@@ -46,6 +47,10 @@ function sanitiseStringToNumber(string) {
     return number;
 }
 
+/**
+ * Request to get all exchange values from the target website. Builds an arra with the results
+ * and passes to the database handler method. 
+ */
 request(baseUrl, (error, response, body) => {
     if (!error) {
         const $ = cheerio.load(body);
@@ -78,3 +83,4 @@ request(baseUrl, (error, response, body) => {
     }
 });
 
+console.log('At the end');

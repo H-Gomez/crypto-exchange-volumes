@@ -1,7 +1,7 @@
 {
   "name": "exchange-volume-tracker",
   "version": "1.0.0",
-  "description": "Get the exchagne volume for crypto exchanges and plots them locally",
+  "description": "Get the exchange volumes for crypto exchanges and plots them locally",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,10 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "mongodb": "^3.1.1",
-    "mongoose": "^5.2.3",
     "request": "^2.87.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
   }
 }
