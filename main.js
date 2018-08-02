@@ -37,7 +37,8 @@ function AddVolumesToDatabase(array) {
 
 /**
  * Removes all commas and currency symbols from a string before formatting to a number. 
- * @param {*} string 
+ * @param {string} string 
+ * @returns {number} 
  */
 function sanitiseStringToNumber(string) {
     let number;
@@ -51,36 +52,43 @@ function sanitiseStringToNumber(string) {
  * Request to get all exchange values from the target website. Builds an arra with the results
  * and passes to the database handler method. 
  */
-request(baseUrl, (error, response, body) => {
-    if (!error) {
-        const $ = cheerio.load(body);
-        const tableRows = $('.table-condensed tbody tr')
-        var exchangeName;
-
-        tableRows.each(function(index, element) {
-            if (element.attribs.id) {
-                var aa = $(element).nextUntil('tr').attr('id');
-                var correctElement = tableRows[index - 1];
-                if (correctElement) {
-                    var volumeValue = $(correctElement).find('.volume').text();
-                    volumeValue = sanitiseStringToNumber(volumeValue);
-                    volumesArray.push({ 
-                        'name': exchangeName,
-                        'volume': volumeValue,
-                        'timestamp': Date.now() 
-                    })
-                } else {
-                    console.log('Issue with element: ' + element);
+function crawlSite() {
+    request(baseUrl, (error, response, body) => {
+        if (!error) {
+            const $ = cheerio.load(body);
+            const tableRows = $('.table-condensed tbody tr')
+            var exchangeName;
+    
+            tableRows.each(function(index, element) {
+                if (element.attribs.id) {
+                    var aa = $(element).nextUntil('tr').attr('id');
+                    var correctElement = tableRows[index - 1];
+                    if (correctElement) {
+                        var volumeValue = $(correctElement).find('.volume').text();
+                        volumeValue = sanitiseStringToNumber(volumeValue);
+                        volumesArray.push({ 
+                            'name': exchangeName,
+                            'volume': volumeValue,
+                            'timestamp': Date.now() 
+                        })
+                    } else {
+                        console.log('Issue with element: ' + element);
+                    }
+                    exchangeName = element.attribs.id;
                 }
-                exchangeName = element.attribs.id;
-            }
-        });
+            });
+    
+            AddVolumesToDatabase(volumesArray);
+    
+        } else {
+            console.log(`Unable to complete the request: ${error}`);
+        }
+    });
+}
 
-        AddVolumesToDatabase(volumesArray);
+crawlSite();
 
-    } else {
-        console.log(`Unable to complete the request: ${error}`);
-    }
-});
-
-console.log('At the end');
+// module.exports = {
+//     sanitiseStringToNumber: sanitiseStringToNumber,
+//     AddVolumesToDatabase: AddVolumesToDatabase
+// }

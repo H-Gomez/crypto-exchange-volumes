@@ -2,9 +2,9 @@
   "name": "exchange-volume-tracker",
   "version": "1.0.0",
   "description": "Get the exchange volumes for crypto exchanges and plots them locally",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha || true"
   },
   "author": "Harvey Gomez",
   "license": "ISC",
