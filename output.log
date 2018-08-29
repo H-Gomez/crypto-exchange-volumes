@@ -1,0 +1,6 @@
+[2018-08-29T17:41:16.577] [INFO] default - JSON obtained from website
+[2018-08-29T17:42:38.678] [INFO] default - Issue with element: [object Object]
+[2018-08-29T17:42:38.704] [INFO] default - JSON obtained from website
+[2018-08-29T17:42:38.704] [INFO] default - Array prepared for insert, trying now...
+[2018-08-29T17:42:38.722] [INFO] default - Databse connection established.
+[2018-08-29T17:42:38.738] [INFO] default - Database insert completed.

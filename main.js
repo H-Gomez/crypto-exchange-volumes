@@ -1,10 +1,24 @@
 const request = require('request');
 const cheerio = require('cheerio');
 const mongodb = require('mongodb');
+const log4js = require('log4js');
 
+// Basic variable setup
 const baseUrl = 'https://coinmarketcap.com/exchanges/volume/24-hour/';
 const exchanges = [ 'binance','bitfinex','okex','huobi','bittrex', 'poloniex', 'cryptopia', 'bittrex','bitstamp', 'kraken', 'coinbase-pro', 'bithumb', 'simex', 'digifinex', 'zb-com', 'bibox', 'bit-z']
 var volumesArray = [];
+
+// Setup Logging
+var logger = log4js.getLogger();
+log4js.configure({
+    appenders: { 
+        out: { type: 'stdout' },
+        node: { type: 'file', filename: 'output.log'}
+     },
+     categories: {
+         default: { appenders: ['out', 'node'], level: 'debug' }
+     }
+})
 
 
 /**
@@ -17,17 +31,17 @@ function AddVolumesToDatabase(array) {
 
     MongoClient.connect(url, function(error, client) {
         if (error) {
-            console.log('Unable to connect to the databse');
+            logger.info('Unable to connect to the databse');
         } else {
-            console.log('Databse connection established.');
+            logger.info('Databse connection established.');
             var db = client.db('exchanges');
             var collection = db.collection('tradeVolumes');           
             array.forEach(function(item, index) {
                 collection.insert(item, function(error, inserted) {
                     if (error) {
-                        console.log(`Database insert FAILED: ${error}`);
+                        logger.info(`Database insert FAILED: ${error}`);
                     } else if (index + 1 == array.length) {
-                        console.log("Database insert completed.")
+                        logger.info("Database insert completed.")
                         client.close();
                     }
                 });
@@ -48,7 +62,7 @@ function filterJsonResponse(array) {
             dispoableArray.push(item);
         }
     });
-    
+
     return dispoableArray;
 }
 
@@ -89,19 +103,18 @@ function crawlSite() {
                             'timestamp': Date.now() 
                         })
                     } else {
-                        console.log('Issue with element: ' + element);
+                        logger.info('Issue with element: ' + element);
                     }
                     exchangeName = element.attribs.id;
                 }
             });
-            console.log('JSON obtained from website');
+            logger.info('JSON obtained from website');
             volumesArray = filterJsonResponse(localArray);
-            console.log('Array prepared for insert, trying now...');
+            logger.info('Array prepared for insert, trying now...');
             AddVolumesToDatabase(volumesArray);
-            console.log(" --- Job completed ---");
     
         } else {
-            console.log(`Unable to complete the request: ${error}`);
+            logger.info(`Unable to complete the request: ${error}`);
         }
     });
 }
