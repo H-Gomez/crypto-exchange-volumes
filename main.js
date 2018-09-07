@@ -5,7 +5,7 @@ const log4js = require('log4js');
 
 // Basic variable setup
 const baseUrl = 'https://coinmarketcap.com/exchanges/volume/24-hour/';
-const exchanges = [ 'binance','bitfinex','okex','huobi','bittrex', 'poloniex', 'cryptopia', 'bittrex','bitstamp', 'kraken', 'coinbase-pro', 'bithumb', 'simex', 'digifinex', 'zb-com', 'bibox', 'bit-z']
+const exchanges = [ 'binance','bitfinex','okex','huobi','bittrex', 'poloniex', 'cryptopia', 'bittrex','bitstamp', 'kraken', 'coinbase-pro', 'bithumb', 'simex', 'digifinex', 'zb-com', 'bibox', 'bit-z'];
 var volumesArray = [];
 
 // Setup Logging
@@ -18,7 +18,7 @@ log4js.configure({
      categories: {
          default: { appenders: ['out', 'node'], level: 'debug' }
      }
-})
+});
 
 
 /**
@@ -41,7 +41,7 @@ function AddVolumesToDatabase(array) {
                     if (error) {
                         logger.info(`Database insert FAILED: ${error}`);
                     } else if (index + 1 == array.length) {
-                        logger.info("Database insert completed.")
+                        logger.info("Database insert completed.");
                         client.close();
                     }
                 });
@@ -73,7 +73,7 @@ function filterJsonResponse(array) {
  */
 function sanitiseStringToNumber(string) {
     let number;
-    let substring = string.replace(/,/g, '')
+    let substring = string.replace(/,/g, '');
     substring = substring.substr(1);
     number = parseFloat(substring);
     return number;
@@ -87,7 +87,7 @@ function crawlSite() {
     request(baseUrl, (error, response, body) => {
         if (!error) {
             const $ = cheerio.load(body);
-            const tableRows = $('.table-condensed tbody tr')
+            const tableRows = $('.table-condensed tbody tr');
             const localArray = [];
             var exchangeName;
     
@@ -101,7 +101,7 @@ function crawlSite() {
                             'name': exchangeName,
                             'volume': volumeValue,
                             'timestamp': Date.now() 
-                        })
+                        });
                     } else {
                         logger.info('Issue with element: ' + element);
                     }
