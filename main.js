@@ -108,11 +108,11 @@ function crawlSite() {
                     exchangeName = element.attribs.id;
                 }
             });
+
             logger.info('JSON obtained from website');
             volumesArray = filterJsonResponse(localArray);
             logger.info('Array prepared for insert, trying now...');
             AddVolumesToDatabase(volumesArray);
-    
         } else {
             logger.info(`Unable to complete the request: ${error}`);
         }
