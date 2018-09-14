@@ -26,8 +26,8 @@ log4js.configure({
  * @param {array} array 
  */
 function AddVolumesToDatabase(array) {
-    var MongoClient = mongodb.MongoClient;
-    var url = 'mongodb://localhost:27017/exchanges';
+    const MongoClient = mongodb.MongoClient;
+    const url = 'mongodb://localhost:27017/exchanges';
 
     MongoClient.connect(url, function(error, client) {
         if (error) {
