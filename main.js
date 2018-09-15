@@ -23,7 +23,7 @@ log4js.configure({
 
 /**
  * Handles the inserting of an array into the mongoDB database.
- * @param {array} array 
+ * @param {array} array
  */
 function AddVolumesToDatabase(array) {
     const MongoClient = mongodb.MongoClient;
