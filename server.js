@@ -37,8 +37,9 @@ MongoClient.connect(url, (err, client) => {
 app.get('/', (req, res) => {
     database.collection('tradeVolumes').find().toArray((err, result) => {
         if (err) return console.log('failed');
-        var data = charts.filterDataset(result);
-        res.send(data);
+        let chartData = charts.filterDataset(result);
+        res.send(chartData);
+        // res.render('index', { cData : chartData});
     });
 });
 
