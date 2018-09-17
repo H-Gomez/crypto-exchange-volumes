@@ -3,6 +3,7 @@ const path = require('path');
 const http = require('http');
 const mongodb = require('mongodb');
 const charts = require('./app/js/charts');
+const config = require('./config/database');
 var database;
 
 // Express app setup
@@ -21,25 +22,29 @@ app.set('view engine', 'jade');
 // Connect to the Mongo Database
 ///////////////////////////////
 const MongoClient = mongodb.MongoClient;
-const url = 'mongodb://localhost:27017/exchanges';
-MongoClient.connect(url, (err, client) => {
+MongoClient.connect(config.mongoURI, (err, client) => {
     if (err) {
-        return console.log(err);
+        return console.log(`Unable to connect to the database: ${err}`);
     }
 
-    database = client.db('exchanges');
-    app.listen(port, () => console.log(`Listening on port ${port}`));
+    database = client.db('crypto-exchanges');
+    app.listen(port, () => console.log(`Listening on port ${port}...`));
 });
 
 //
 // Routes
 /////////////////////////////// 
 app.get('/', (req, res) => {
+    res.render('index');
+});
+
+app.get('/charts/all', (req, res) => {
     database.collection('tradeVolumes').find().toArray((err, result) => {
-        if (err) return console.log('failed');
+        if (err) {
+            return console.log('Failed to get chart data');
+        }
         let chartData = charts.filterDataset(result);
         res.send(chartData);
-        // res.render('index', { cData : chartData});
     });
 });
 

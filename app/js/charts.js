@@ -5,22 +5,40 @@ module.exports = {
      * @returns {array} filteredData
      */
     filterDataset: function(data) {
-        const exchanges = ['bitfinex', 'bitstamp'];
-        const filteredData = [];
+        const exchanges = ['binance','bitfinex','okex','huobi','bittrex', 'poloniex', 'cryptopia', 'bittrex','bitstamp', 'kraken', 'coinbase-pro', 'bithumb', 'simex', 'digifinex', 'zb-com', 'bibox', 'bit-z'];
+        const chartSeries = [];
 
         exchanges.forEach(function(exchange) {
-            let newArray = data.filter(function(item) {
+            const tradeVolumes = [];
+
+            // Get trade volumes for the current exchange from the total dataset
+            let filteredArray = data.filter(function(item) {
                 return item.name === exchange;
             });
             
-            newArray.forEach(function(item) {
-                let arr = [];
-                arr.push(item.timestamp);
-                arr.push(item.volume);
-                filteredData.push(arr);
+            // Remove uneeded collumns from the filtered dataset into new array.
+            filteredArray.forEach(function(item) {
+                if (item.volume) {
+                    let arr = [];
+                    arr.push(item.timestamp);
+                    arr.push(item.volume);
+                    tradeVolumes.push(arr);
+                } else {
+                    console.log('The volume property is missing from the dataset');
+                }
             });
+
+            // Create new object for the respective exchange to be used in HighCharts
+            let exchangeObject = {};
+            exchangeObject.name = exchange;
+            exchangeObject.data = tradeVolumes;
+            exchangeObject.tooltip = {
+                valueDecimals: 2
+            };
+
+            chartSeries.push(exchangeObject);
         });
         
-        return filteredData;
+        return chartSeries;
     }
 };

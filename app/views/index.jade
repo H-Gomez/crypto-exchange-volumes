@@ -4,8 +4,8 @@ html
     title= title
     link(rel='stylesheet', href='/css/app.css')
   body
-    h1 hello
-    div#container
+    h1 #{cData}
+    div#container(style="height: 800px;")
 
     script(src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
     script(src='https://code.jquery.com/jquery-3.1.1.min.js')
@@ -14,21 +14,28 @@ html
     script(src='https://code.highcharts.com/stock/modules/export-data.js')
 
     script.
-      Highcharts.stockChart('container', {
-        rangeSelector: {
-            selected: 1
-        },
+      jQuery(document).ready(function($) {
+          $.ajax({
+              datatype: "json",
+              url: "http://localhost:3000/charts/all",
+          }).done(function(response) {
+              buildCharts(response);
+          }).fail(function(){
+              console.log('Ajax failed to get chart data');
+          });
 
-        title: {
-            text: 'AAPL Stock Price'
-        },
-
-        series: [{
-            name: 'AAPL',
-            data: #{cData},
-            tooltip: {
-                valueDecimals: 2
-            }
-        }]
+          function buildCharts(chartData) {
+              Highcharts.stockChart('container', {
+                  rangeSelector: {
+                      selected: 1
+                  },
+                  title: {
+                      text: 'Crypto Exchange Volumes'
+                  },
+                  series: chartData
+              });
+          }
       });
+
+      
 
