@@ -19,3 +19,46 @@
 [2018-09-16T00:29:22.514] [INFO] default - Array prepared for insert, trying now...
 [2018-09-16T00:29:22.534] [INFO] default - Databse connection established.
 [2018-09-16T00:29:22.553] [INFO] default - Database insert completed.
+[2018-09-17T13:42:48.026] [INFO] default - Issue with element: [object Object]
+[2018-09-17T13:42:48.059] [INFO] default - JSON obtained from website
+[2018-09-17T13:42:48.060] [INFO] default - Array prepared for insert, trying now...
+[2018-09-17T13:42:48.179] [INFO] default - Databse connection established.
+[2018-09-17T13:42:48.206] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("d0ecb78e-4f9c-44eb-931f-512d66f08b44") }, $db: "exchanges" }
+[2018-09-17T13:42:48.277] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("72809b67-6e43-45c8-bdd4-aa3181a44895") }, $db: "exchanges" }
+[2018-09-17T13:42:48.277] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("e8825718-20c5-4cf9-a4f1-e7c10698618f") }, $db: "exchanges" }
+[2018-09-17T13:42:48.345] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("d1b81388-6fdd-4880-858d-c79c5b527930") }, $db: "exchanges" }
+[2018-09-17T13:42:48.346] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("6613b2da-be7e-4dbb-8d51-9aa7c025b06f") }, $db: "exchanges" }
+[2018-09-17T13:42:48.346] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("fe1bffde-6460-4647-ad1b-743f8539b11f") }, $db: "exchanges" }
+[2018-09-17T13:42:48.418] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("6d86af9a-ca3d-4bea-b91a-ee298cab7af2") }, $db: "exchanges" }
+[2018-09-17T13:42:48.418] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("857cd730-e15c-4f88-a2cc-2db0080673bc") }, $db: "exchanges" }
+[2018-09-17T13:42:48.419] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("b23c98ae-855e-436c-8bf5-764aa3d3458e") }, $db: "exchanges" }
+[2018-09-17T13:42:48.419] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("087dbb12-0729-47ea-aba1-a5be3e250312") }, $db: "exchanges" }
+[2018-09-17T13:42:48.488] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("9c727490-6eea-4d5b-b85b-c81730d9ea8e") }, $db: "exchanges" }
+[2018-09-17T13:42:48.489] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("0e704810-850f-4e4f-baf1-4968e313bd7c") }, $db: "exchanges" }
+[2018-09-17T13:42:48.489] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("53d7b155-fa0f-4012-8f4c-d890e6d9339a") }, $db: "exchanges" }
+[2018-09-17T13:42:48.490] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("bbc34d9e-e135-4138-b236-cd2009856247") }, $db: "exchanges" }
+[2018-09-17T13:42:48.491] [INFO] default - Database insert FAILED: MongoError: not authorized on exchanges to execute command { insert: "tradeVolumes", ordered: true, $clusterTime: { clusterTime: Timestamp(1537188163, 1), signature: { hash: BinData(0, 38E975743E050599171CF381EE1C99486D6D7F9E), keyId: 6601884948980826113 } }, lsid: { id: UUID("bfe33a76-d3cc-4bf7-9b72-8f44e20668a1") }, $db: "exchanges" }
+[2018-09-17T13:43:15.609] [INFO] default - Issue with element: [object Object]
+[2018-09-17T13:43:15.632] [INFO] default - JSON obtained from website
+[2018-09-17T13:43:15.632] [INFO] default - Array prepared for insert, trying now...
+[2018-09-17T13:43:15.756] [INFO] default - Databse connection established.
+[2018-09-17T13:43:26.675] [INFO] default - Issue with element: [object Object]
+[2018-09-17T13:43:26.700] [INFO] default - JSON obtained from website
+[2018-09-17T13:43:26.701] [INFO] default - Array prepared for insert, trying now...
+[2018-09-17T13:43:26.819] [INFO] default - Databse connection established.
+[2018-09-17T13:43:27.138] [INFO] default - Database insert completed.
+[2018-09-17T15:31:08.596] [INFO] default - Issue with element: [object Object]
+[2018-09-17T15:31:08.619] [INFO] default - JSON obtained from website
+[2018-09-17T15:31:08.619] [INFO] default - Array prepared for insert, trying now...
+[2018-09-17T15:31:08.788] [INFO] default - Databse connection established.
+[2018-09-19T15:31:08.129] [INFO] default - Issue with element: [object Object]
+[2018-09-19T15:35:21.576] [INFO] default - Issue with element: [object Object]
+[2018-09-19T15:35:21.602] [INFO] default - JSON obtained from website
+[2018-09-19T15:35:21.603] [INFO] default - Array prepared for insert, trying now...
+[2018-09-19T15:35:21.716] [INFO] default - Databse connection established.
+[2018-09-19T15:35:22.049] [INFO] default - Database insert completed.
+[2018-09-19T15:36:44.467] [INFO] default - Issue with element: [object Object]
+[2018-09-19T15:39:26.934] [INFO] default - JSON obtained from website
+[2018-09-19T15:39:26.934] [INFO] default - Array prepared for insert, trying now...
+[2018-09-19T15:39:27.116] [INFO] default - Databse connection established.
+[2018-09-19T15:39:27.486] [INFO] default - Database insert completed.

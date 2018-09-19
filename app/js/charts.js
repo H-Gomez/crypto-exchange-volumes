@@ -2,10 +2,11 @@ module.exports = {
     /**
      * Filters the JSON data from the database to make it ready for charting.
      * Creates a new array which volume values seperated by exchange.
-     * @returns {array} filteredData
+     * @param {array} data - The dataset to be filtered
+     * @returns {array} chartSeries 
      */
     filterDataset: function(data) {
-        const exchanges = ['binance','bitfinex','okex','huobi','bittrex', 'poloniex', 'cryptopia', 'bittrex','bitstamp', 'kraken', 'coinbase-pro', 'bithumb', 'simex', 'digifinex', 'zb-com', 'bibox', 'bit-z'];
+        const exchanges = ['bi-box', 'binance', 'bitfinex', 'bithumb', 'bitstamp', 'bittrex', 'coinbase-pro', 'huobi', 'okex', 'poloniex'];
         const chartSeries = [];
 
         exchanges.forEach(function(exchange) {
@@ -20,7 +21,7 @@ module.exports = {
             filteredArray.forEach(function(item) {
                 if (item.volume) {
                     let arr = [];
-                    arr.push(item.timestamp);
+                    arr.push(item.date);
                     arr.push(item.volume);
                     tradeVolumes.push(arr);
                 } else {
@@ -28,10 +29,16 @@ module.exports = {
                 }
             });
 
+            //sort array
+            tradeVolumes.sort(function(a, b) {
+                return a[0] - b[0];
+            });
+
             // Create new object for the respective exchange to be used in HighCharts
             let exchangeObject = {};
             exchangeObject.name = exchange;
             exchangeObject.data = tradeVolumes;
+            exchangeObject.type = 'area';
             exchangeObject.tooltip = {
                 valueDecimals: 2
             };

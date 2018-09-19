@@ -19,6 +19,7 @@ html
               datatype: "json",
               url: "http://localhost:3000/charts/all",
           }).done(function(response) {
+              console.log(response);
               buildCharts(response);
           }).fail(function(){
               console.log('Ajax failed to get chart data');
@@ -29,10 +30,18 @@ html
                   rangeSelector: {
                       selected: 1
                   },
+                  plotOptions: {
+                      area: {
+                          stacking: 'percent'
+                      }
+                  },
                   title: {
                       text: 'Crypto Exchange Volumes'
                   },
-                  series: chartData
+                  series: chartData,
+                  xAxis: {
+                    type: 'datetime'
+                  }
               });
           }
       });

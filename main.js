@@ -5,7 +5,7 @@ const log4js = require('log4js');
 
 // Basic variable setup
 const baseUrl = 'https://coinmarketcap.com/exchanges/volume/24-hour/';
-const exchanges = [ 'binance','bitfinex','okex','huobi','bittrex', 'poloniex', 'cryptopia', 'bittrex','bitstamp', 'kraken', 'coinbase-pro', 'bithumb', 'simex', 'digifinex', 'zb-com', 'bibox', 'bit-z'];
+const exchanges = [ 'binance','bitfinex','okex','huobi','bittrex','poloniex','cryptopia','bittrex','bitstamp','kraken','coinbase-pro','bithumb','simex','digifinex','zb-com','bibox','bit-z','upbit'];
 var volumesArray = [];
 
 // Setup Logging
@@ -27,15 +27,15 @@ log4js.configure({
  */
 function AddVolumesToDatabase(array) {
     const MongoClient = mongodb.MongoClient;
-    const url = 'mongodb://localhost:27017/exchanges';
+    const url = 'mongodb://dbadmin:Exp3ll1Armu5s@ds159812.mlab.com:59812/crypto-exchanges';
 
     MongoClient.connect(url, function(error, client) {
         if (error) {
             logger.info('Unable to connect to the databse');
         } else {
             logger.info('Databse connection established.');
-            var db = client.db('exchanges');
-            var collection = db.collection('tradeVolumes');           
+            var db = client.db('crypto-exchanges');
+            var collection = db.collection('vols');           
             array.forEach(function(item, index) {
                 collection.insert(item, function(error, inserted) {
                     if (error) {
@@ -100,7 +100,7 @@ function crawlSite() {
                         localArray.push({ 
                             'name': exchangeName,
                             'volume': volumeValue,
-                            'timestamp': Date.now() 
+                            'timestamp': new Date(new Date().setUTCHours(0,0,0,0))
                         });
                     } else {
                         logger.info('Issue with element: ' + element);
@@ -110,9 +110,9 @@ function crawlSite() {
             });
 
             logger.info('JSON obtained from website');
-            volumesArray = filterJsonResponse(localArray);
+            //volumesArray = filterJsonResponse(localArray);
             logger.info('Array prepared for insert, trying now...');
-            AddVolumesToDatabase(volumesArray);
+            AddVolumesToDatabase(localArray);
         } else {
             logger.info(`Unable to complete the request: ${error}`);
         }
