@@ -5,7 +5,7 @@ const log4js = require('log4js');
 
 // Basic variable setup
 const baseUrl = 'https://coinmarketcap.com/exchanges/volume/24-hour/';
-const exchanges = [ 'binance','bitfinex','okex','huobi','bittrex','poloniex','cryptopia','bittrex','bitstamp','kraken','coinbase-pro','bithumb','simex','digifinex','zb-com','bibox','bit-z','upbit'];
+const exchanges = [ 'binance', 'bitfinex', 'okex', 'huobi', 'bittrex', 'poloniex', 'kucoin', 'cryptopia', 'bittrex','bitstamp', 'kraken', 'coinbase-pro', 'bithumb', 'simex', 'digifinex', 'zb-com', 'bibox', 'bit-z'];
 var volumesArray = [];
 
 // Setup Logging
