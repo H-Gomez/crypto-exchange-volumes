@@ -35,7 +35,7 @@ function AddVolumesToDatabase(array) {
         } else {
             logger.info('Databse connection established.');
             var db = client.db('crypto-exchanges');
-            var collection = db.collection('volumes');           
+            var collection = db.collection('tradeVolumes');           
             array.forEach(function(item, index) {
                 collection.insert(item, function(error, inserted) {
                     if (error) {
@@ -100,7 +100,7 @@ function crawlSite() {
                         localArray.push({ 
                             'name': exchangeName,
                             'volume': volumeValue,
-                            'timestamp': new Date(new Date().setUTCHours(0,0,0,0))
+                            'date': new Date().setUTCHours(0,0,0,0)
                         });
                     } else {
                         logger.info('Issue with element: ' + element);
