@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/charts/all', (req, res) => {
-    database.collection('volumes').find().toArray((err, result) => {
+    database.collection('tradeVolumes').find().toArray((err, result) => {
         if (err) {
             return console.log('Failed to get chart data');
         }

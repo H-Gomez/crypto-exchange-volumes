@@ -72,3 +72,11 @@
 [2018-09-21T12:03:56.593] [INFO] default - Array prepared for insert, trying now...
 [2018-09-21T12:03:56.705] [INFO] default - Databse connection established.
 [2018-09-21T12:03:57.063] [INFO] default - Database insert completed.
+[2018-09-26T21:03:37.287] [INFO] default - Issue with element: [object Object]
+[2018-09-26T21:03:37.314] [INFO] default - JSON obtained from website
+[2018-09-26T21:03:37.314] [INFO] default - Array prepared for insert, trying now...
+[2018-09-26T21:03:37.522] [INFO] default - Databse connection established.
+[2018-09-26T21:03:59.188] [INFO] default - Issue with element: [object Object]
+[2018-09-26T21:03:59.214] [INFO] default - JSON obtained from website
+[2018-09-26T21:03:59.214] [INFO] default - Array prepared for insert, trying now...
+[2018-09-26T21:03:59.482] [INFO] default - Databse connection established.
