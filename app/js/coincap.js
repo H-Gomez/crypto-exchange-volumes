@@ -1,10 +1,29 @@
 /** Handler for the CoinCap API functionality */
 const request = require('request');
+const db = require('./database');
 const baseUrl = "https://api.coincap.io/v2/exchanges";
 
-request(baseUrl, (response, error, data) => {
-    console.log(data);
-});
+/**
+ * Gets the JSON data from the baseUrl API above. Sorts the response
+ * and prepares it to be stored in the database.
+ */
+function getExchangeDataFromApi() {
+    request(baseUrl, (response, error, result) => {
+        let dataset = JSON.parse(result);
+        let exchanges = [];
+    
+        dataset.forEach(function(item) {
+            let exchange = {};
+            exchanges.push({ 
+                'name': item.name,
+                'volume': itme.volumeUsd,
+                'date': new Date().setUTCHours(0,0,0,0)
+            });
+        });
+
+        return exchanges;
+    });
+}
 
 /**
  * Calcuates the total volume for the day based on the data that is passed into this functions
@@ -12,5 +31,34 @@ request(baseUrl, (response, error, data) => {
  * @param {*} dataset 
  */
 function calculateTotalVolume(dataset) {
-    let totalVol;
-};
+    var totalVol = 0;
+    dataset.forEach(function(item) {
+        if (item.volumeUsd > 0) {
+            totalVol = totalVol + parseInt(item.volumeUsd);
+        } else {
+            console.log(`Exchange was excluded from volume count ${item.name}`);
+        }
+        
+        return totalVol;
+    });
+}
+
+console.log(db);
+let response = getExchangeDataFromApi();
+let totalVolume = calculateTotalVolume(response);
+db.addTotalVolume(totalVolume);
+
+
+/**
+ * TODO
+ * - View all exchanges on the same chart to get correct market share
+ * - Migrate Datasource to coincap API
+ * - Add alert or reporting should the data fetch not be completed
+ * - In the reporting state if only a certain exchange was not completed.
+ * - Correctly show legend for each exchange
+ * - Add total volume value to the database each day
+ * - Add endpoint to get total volume 
+ * - Calculate total volume in bitcoin
+ * - Show total volume in terms of total crypto market cap
+ * - Show total crypto market cap
+ */

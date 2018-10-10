@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const http = require('http');
 const mongodb = require('mongodb');
 const charts = require('./app/js/charts');
 const config = require('./config/database');
@@ -41,7 +40,7 @@ app.get('/', (req, res) => {
 app.get('/charts/all', (req, res) => {
     database.collection('tradeVolumes').find().toArray((err, result) => {
         if (err) {
-            return console.log('Failed to get chart data');
+            return console.log(`Failed to get chart data: ${err}`);
         }
         let chartData = charts.filterDataset(result);
         res.send(chartData);

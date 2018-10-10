@@ -24,6 +24,7 @@ html
               console.log('Ajax failed to get chart data');
           });
 
+          // Move to repsective file
           function buildCharts(chartData) {
               Highcharts.stockChart('container', {
                   rangeSelector: {
@@ -31,7 +32,7 @@ html
                   },
                   plotOptions: {
                       area: {
-                          stacking: 'percent'
+                          stacking: 'normal'
                       }
                   },
                   title: {
