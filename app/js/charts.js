@@ -6,7 +6,7 @@ module.exports = {
      * @returns {array} chartSeries 
      */
     filterDataset: function(data) {
-        const exchanges = ['bi-box', 'binance', 'bitfinex', 'bithumb', 'bitstamp', 'bittrex', 'coinbase-pro', 'huobi', 'okex', 'poloniex', 'coinegg'];
+        const exchanges = ['bi-box', 'binance', 'bitfinex', 'bithumb', 'bitstamp', 'bittrex', 'coinbase-pro', 'huobi', 'okex', 'poloniex' ];
         const chartSeries = [];
 
         exchanges.forEach(function(exchange) {

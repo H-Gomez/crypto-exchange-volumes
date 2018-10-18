@@ -32,13 +32,16 @@ html
                   },
                   plotOptions: {
                       area: {
-                          stacking: 'normal'
+                          stacking: 'percent'
                       }
                   },
                   title: {
                       text: 'Crypto Exchange Volumes'
                   },
                   series: chartData,
+                  yAxis: {
+                      offset: 20
+                  },
                   xAxis: {
                     type: 'datetime'
                   },
