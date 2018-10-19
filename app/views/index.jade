@@ -2,9 +2,38 @@ html
   head
     - var title = title || 'Exchange Volumes'
     title= title
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/app.css')
   body
-    div#container(style="height: 800px;")
+    header
+        div.container
+            h4 Crypto Volumes       
+    div.container
+        div.row
+            div.col-sm-12
+                div.precontent
+                    div.row
+                        div.col-sm-6.col-lg-3
+                            div.precontent-item
+                                p 24HR Volume($): 
+                                p $43545
+                        div.col-sm-6.col-lg-3
+                            div.precontent-item
+                                p 24HR Volume(B)
+                                p 1234
+                        div.col-sm-6.col-lg-3
+                            div.precontent-item
+                                p Change 24HR
+                                p 4.5%
+                        div.col-sm-6.col-lg-3
+                            div.precontent-item
+                                p Change 7 Days
+                                p 5.89%
+        div.row
+            div.col-sm-12
+                div#container(style="height: 800px;")
+
+    
 
     script(src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
     script(src='https://code.jquery.com/jquery-3.1.1.min.js')
@@ -18,7 +47,6 @@ html
               datatype: "json",
               url: "http://localhost:3000/charts/all",
           }).done(function(response) {
-              console.log(response);
               buildCharts(response);
           }).fail(function(){
               console.log('Ajax failed to get chart data');
@@ -35,9 +63,6 @@ html
                           stacking: 'percent'
                       }
                   },
-                  title: {
-                      text: 'Crypto Exchange Volumes'
-                  },
                   series: chartData,
                   yAxis: {
                       offset: 20
@@ -47,7 +72,8 @@ html
                   },
                   legend: {
                       enabled: true
-                  }
+                  },
+                  exporting: { enabled: false }
               });
           }
       });

@@ -13,7 +13,7 @@ app.set('port', port);
 //
 // Middleware
 ///////////////////////////////
-app.use(express.static(__dirname + '/app/views'));
+app.use(express.static(__dirname + '/app'));
 app.set('views', path.join(__dirname, '/app/views'));
 app.set('view engine', 'jade');
 

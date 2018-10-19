@@ -1,0 +1,40 @@
+html {
+    font-size: 20px;
+}
+
+body {
+    background: #efefef;
+}
+
+header {
+    background: #5a67b9;
+    color: #fff;
+    height: 80px;
+    padding: 1em 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.precontent {
+    padding: 1.5em 0;
+}
+
+.precontent-item {
+    text-align: center;
+}
+
+/** Highcharts Styles **/
+.highcharts-container {
+    border-radius: 4px;
+}
+
+.highcharts-input-group {
+    display: none;
+}
+
+.highcharts-range-label {
+    display: none;
+}
