@@ -17,39 +17,43 @@ app.use(express.static(__dirname + '/app/views'));
 app.set('views', path.join(__dirname, '/app/views'));
 app.set('view engine', 'jade');
 
-// 
+//
 // Connect to the Mongo Database
 ///////////////////////////////
 const MongoClient = mongodb.MongoClient;
-MongoClient.connect(config.mongoURI, (err, client) => {
-    if (err) {
-        return console.log(`Unable to connect to the database: ${err}`);
-    }
+MongoClient.connect(
+    config.mongoURI,
+    (err, client) => {
+        if (err) {
+            return console.log(`Unable to connect to the database: ${err}`);
+        }
 
-    database = client.db('crypto-exchanges');
-    app.listen(port, () => console.log(`Listening on port ${port}...`));
-});
+        database = client.db('crypto-exchanges');
+        app.listen(port, () => console.log(`Listening on port ${port}...`));
+    }
+);
 
 //
 // Routes
-/////////////////////////////// 
+///////////////////////////////
 app.get('/', (req, res) => {
     res.render('index');
 });
 
 app.get('/charts/all', (req, res) => {
-    database.collection('tradeVolumes').find().toArray((err, result) => {
-        if (err) {
-            return console.log(`Failed to get chart data: ${err}`);
-        }
-        let chartData = charts.filterDataset(result);
-        res.send(chartData);
-    });
+    database
+        .collection('tradeVolumes')
+        .find()
+        .toArray((err, result) => {
+            if (err) {
+                return console.log(`Failed to get chart data: ${err}`);
+            }
+            let chartData = charts.filterDataset(result);
+            res.send(chartData);
+        });
 });
 
 //
 // 404 Route
 ///////////////////////////////
 app.get('*', (req, res) => res.render('index'));
-
-
