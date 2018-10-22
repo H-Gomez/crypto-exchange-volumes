@@ -53,6 +53,15 @@ app.get('/charts/all', (req, res) => {
         });
 });
 
+app.get('/volumes/total', (req, res) => {
+    database.collection('volumeTotal').find().toArray((error, result) => {
+        if (error) {
+            return console.log(`Failed to get total volumes from exchange: ${error}`);
+        }
+        res.send(result)
+    });
+});
+
 //
 // 404 Route
 ///////////////////////////////
