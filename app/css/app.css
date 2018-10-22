@@ -26,6 +26,13 @@ p {
     text-align: center;
 }
 
+.precontent-item p:first-child {
+    font-size: 0.75em;
+    margin: 0.5em 0;
+    color: #969696;
+    text-transform: uppercase;
+}
+
 /** Highcharts Styles **/
 .highcharts-container {
     border-radius: 4px;

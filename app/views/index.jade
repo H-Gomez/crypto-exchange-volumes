@@ -15,8 +15,8 @@ html
                     div.row
                         div.col-sm-6.col-lg-3
                             div.precontent-item
-                                p 24HR Volume($): 
-                                p $43545
+                                p 24HR Volume($) 
+                                p $4385M
                         div.col-sm-6.col-lg-3
                             div.precontent-item
                                 p 24HR Volume(B)
@@ -48,7 +48,7 @@ html
               url: "http://localhost:3000/charts/all",
           }).done(function(response) {
               buildCharts(response);
-          }).fail(function(){
+          }).fail(function() {
               console.log('Ajax failed to get chart data');
           });
 
