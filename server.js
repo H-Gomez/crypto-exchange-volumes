@@ -77,7 +77,7 @@ app.get('/', (req, res) => {
 
 app.get('/charts/all', (req, res) => {
     database
-        .collection('tradeVolumes')
+        .collection('volumes')
         .find()
         .toArray((err, result) => {
             if (err) {

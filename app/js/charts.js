@@ -6,6 +6,7 @@ module.exports = {
      * @returns {array} chartSeries 
      */
     filterDataset: function(data) {
+        //const exchanges = data.length - 1;
         const exchanges = ['bi-box', 'binance', 'bitfinex', 'bithumb', 'bitstamp', 'bittrex', 'coinbase-pro', 'huobi', 'okex', 'poloniex' ];
         const chartSeries = [];
 
@@ -14,7 +15,7 @@ module.exports = {
 
             // Get trade volumes for the current exchange from the total dataset
             let filteredArray = data.filter(function(item) {
-                return item.name === exchange;
+                return item.exchangeId === exchange;
             });
             
             // Remove uneeded collumns from the filtered dataset into new array.
