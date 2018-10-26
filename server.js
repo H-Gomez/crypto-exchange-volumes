@@ -33,11 +33,46 @@ MongoClient.connect(
     }
 );
 
+var totalVolumes = function(req, res, next) {
+    database
+        .collection('volumeTotal')
+        .find()
+        .toArray((error, result) => {
+            if (error) {
+                return console.log(
+                    `Failed to get total volumes from exchange: ${error}`
+                );
+            }
+
+            let volume = formatCurrency(result[0].volume);
+            req.totalVolumes = volume;
+            next();
+        });
+};
+
+app.use(totalVolumes);
+
+function formatCurrency(number) {
+    decimalPlaces = 20;
+    let roundings = ['K', 'M', 'B', 'T'];
+
+    for (var i = roundings.length - 1; i >= 0; i--) {
+        let size = Math.pow(10, (i + 1) * 3);
+        if (size <= number) {
+            number = Math.round((number * decimalPlaces) / size) / decimalPlaces;
+            number += roundings[i];
+            break;
+        }
+    }
+
+    return number;
+}
+
 //
 // Routes
 ///////////////////////////////
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { totalvol: req.totalVolumes });
 });
 
 app.get('/charts/all', (req, res) => {
@@ -54,12 +89,17 @@ app.get('/charts/all', (req, res) => {
 });
 
 app.get('/volumes/total', (req, res) => {
-    database.collection('volumeTotal').find().toArray((error, result) => {
-        if (error) {
-            return console.log(`Failed to get total volumes from exchange: ${error}`);
-        }
-        res.send(result)
-    });
+    database
+        .collection('volumeTotal')
+        .find()
+        .toArray((error, result) => {
+            if (error) {
+                return console.log(
+                    `Failed to get total volumes from exchange: ${error}`
+                );
+            }
+            res.send(result);
+        });
 });
 
 //
