@@ -3,11 +3,93 @@ module.exports = {
      * Filters the JSON data from the database to make it ready for charting.
      * Creates a new array which volume values seperated by exchange.
      * @param {array} data - The dataset to be filtered
-     * @returns {array} chartSeries 
+     * @returns {array} chartSeries
      */
     filterDataset: function(data) {
-        //const exchanges = data.length - 1;
-        const exchanges = ['bi-box', 'binance', 'bitfinex', 'bithumb', 'bitstamp', 'bittrex', 'coinbase-pro', 'huobi', 'okex', 'poloniex' ];
+        const exchanges = [
+            'bithumb',
+            'binance',
+            'okex',
+            'huobi',
+            'zb',
+            'hitbtc',
+            'bibox',
+            'lbank',
+            'bitfinex',
+            'ooobtc',
+            'coinegg',
+            'qryptos',
+            'quoine',
+            'coinbene',
+            'gdax',
+            'allcoin',
+            'bit-z',
+            'kraken',
+            'bitbank',
+            'bitstamp',
+            'coinex',
+            'sistemkoin',
+            'bittrex',
+            'btcbox',
+            'exmo',
+            'gate',
+            'bitflyer',
+            'bitbay',
+            'yobit',
+            'gemini',
+            'livecoin',
+            'kucoin',
+            'bigone',
+            'itbit',
+            'poloniex',
+            'coinone',
+            'zaif',
+            'korbit',
+            'cex',
+            'lakebtc',
+            'cryptopia',
+            'tidex',
+            'okcoin',
+            'luno',
+            'btcturk',
+            'independentreserve',
+            'idex',
+            'btcc',
+            'bxinth',
+            'coinfloor',
+            'acx',
+            'bitso',
+            'btcmarket',
+            'quadrigacx',
+            'bleutrade',
+            'coinexchange',
+            'tradesatoshi',
+            'coinmate',
+            'wex',
+            'mercado',
+            'bitmarket',
+            'therocktrading',
+            'lykke',
+            'kuna',
+            'braziliex',
+            'btctradeua',
+            'coinnest',
+            'gatecoin',
+            'xbtce'
+        ];
+
+        // const exchanges = [
+        //     'bi-box',
+        //     'binance',
+        //     'bitfinex',
+        //     'bithumb',
+        //     'bitstamp',
+        //     'bittrex',
+        //     'coinbase-pro',
+        //     'huobi',
+        //     'okex',
+        //     'poloniex'
+        // ];
         const chartSeries = [];
 
         exchanges.forEach(function(exchange) {
@@ -17,7 +99,7 @@ module.exports = {
             let filteredArray = data.filter(function(item) {
                 return item.exchangeId === exchange;
             });
-            
+
             // Remove uneeded collumns from the filtered dataset into new array.
             filteredArray.forEach(function(item) {
                 if (item.volume) {
@@ -26,7 +108,9 @@ module.exports = {
                     arr.push(item.volume);
                     tradeVolumes.push(arr);
                 } else {
-                    console.log('The volume property is missing from the dataset');
+                    console.log(
+                        'The volume property is missing from the dataset'
+                    );
                 }
             });
 
@@ -46,7 +130,7 @@ module.exports = {
 
             chartSeries.push(exchangeObject);
         });
-        
+
         return chartSeries;
     }
 };
