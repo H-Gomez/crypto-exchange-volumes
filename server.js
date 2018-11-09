@@ -3,23 +3,26 @@ const path = require('path');
 const mongodb = require('mongodb');
 const charts = require('./app/js/charts');
 const config = require('./config/database');
+const middleware = require('./lib/middleware')
 let database;
 
 // Express app setup
+// ---------------------------
 const app = express();
 const port = process.env.PORT || 3000;
 app.set('port', port);
 
 //
 // Middleware
-///////////////////////////////
+// ---------------------------
 app.use(express.static(__dirname + '/app'));
+app.use(totalVolumes);
 app.set('views', path.join(__dirname, '/app/views'));
 app.set('view engine', 'jade');
 
 //
 // Connect to the Mongo Database
-///////////////////////////////
+// ---------------------------
 const MongoClient = mongodb.MongoClient;
 MongoClient.connect(
     config.mongoURI,
@@ -33,7 +36,7 @@ MongoClient.connect(
     }
 );
 
-var totalVolumes = function(req, res, next) {
+function totalVolumes(req, res, next) {
     database
         .collection('volumeTotal')
         .find()
@@ -44,13 +47,23 @@ var totalVolumes = function(req, res, next) {
                 );
             }
 
-            let volume = formatCurrency(result[0].volume);
-            req.totalVolumes = volume;
+            req.todayTotalVolume = formatCurrency(result[0].volume);
+            req.totalVolumes = formatTotalVolumes(result);
             next();
         });
 };
 
-app.use(totalVolumes);
+function formatTotalVolumes(volumes) {
+    let arr = [];
+    volumes.forEach((item) => {
+        arr.push([
+            item.date,
+            item.volume
+        ])
+    })
+
+    return arr;
+}
 
 function formatCurrency(number) {
     decimalPlaces = 20;
@@ -70,9 +83,12 @@ function formatCurrency(number) {
 
 //
 // Routes
-///////////////////////////////
+// ---------------------------
 app.get('/', (req, res) => {
-    res.render('index', { totalvol: req.totalVolumes });
+    res.render('index', { 
+        todayTotalVolume: req.todayTotalVolume,
+        totalVolumes: JSON.stringify(req.totalVolumes)
+    });
 });
 
 app.get('/charts/all', (req, res) => {
@@ -89,20 +105,12 @@ app.get('/charts/all', (req, res) => {
 });
 
 app.get('/volumes/total', (req, res) => {
-    database
-        .collection('volumeTotal')
-        .find()
-        .toArray((error, result) => {
-            if (error) {
-                return console.log(
-                    `Failed to get total volumes from exchange: ${error}`
-                );
-            }
-            res.send(result);
-        });
+    res.send(req.totalVolumes);
 });
+
+
 
 //
 // 404 Route
-///////////////////////////////
+// ---------------------------
 app.get('*', (req, res) => res.render('index'));

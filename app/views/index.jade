@@ -16,11 +16,11 @@ html
                         div.col-sm-6.col-lg-3
                             div.precontent-item
                                 p 24HR Volume($) 
-                                p $#{totalvol}
+                                p $#{todayTotalVolume}
                         div.col-sm-6.col-lg-3
                             div.precontent-item
                                 p 24HR Volume(B)
-                                p 1234
+                                p 4124
                         div.col-sm-6.col-lg-3
                             div.precontent-item
                                 p Change 24HR
@@ -33,50 +33,18 @@ html
             div.col-sm-12
                 div#container(style="height: 800px;")
 
-    
+        br
 
+        div.row
+            div.col-sm-12
+                div#total-volumes(style="height: 500px;")
+        
+    
+    <!-- Scripts for this page -->
     script(src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
     script(src='https://code.jquery.com/jquery-3.1.1.min.js')
     script(src='https://code.highcharts.com/stock/highstock.js')
     script(src='https://code.highcharts.com/stock/modules/exporting.js')
     script(src='https://code.highcharts.com/stock/modules/export-data.js')
-
-    script.
-      jQuery(document).ready(function($) {
-          $.ajax({
-              datatype: "json",
-              url: "http://localhost:3000/charts/all",
-          }).done(function(response) {
-              buildCharts(response);
-          }).fail(function() {
-              console.log('Ajax failed to get chart data');
-          });
-
-          // Move to repsective file
-          function buildCharts(chartData) {
-              Highcharts.stockChart('container', {
-                  rangeSelector: {
-                      selected: 1
-                  },
-                  plotOptions: {
-                      area: {
-                          stacking: 'percent'
-                      }
-                  },
-                  series: chartData,
-                  yAxis: {
-                      offset: 20
-                  },
-                  xAxis: {
-                    type: 'datetime'
-                  },
-                  legend: {
-                      enabled: true
-                  },
-                  exporting: { enabled: false }
-              });
-          }
-      });
-
-      
-
+    script(src='/js/highcharts.js')
+        
