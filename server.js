@@ -3,7 +3,6 @@ const path = require('path');
 const mongodb = require('mongodb');
 const charts = require('./app/js/charts');
 const config = require('./config/database');
-const middleware = require('./lib/middleware')
 let database;
 
 // Express app setup

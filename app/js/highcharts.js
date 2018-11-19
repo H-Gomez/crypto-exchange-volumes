@@ -47,6 +47,9 @@ jQuery(document).ready(function($) {
     }
 
     function buildVolumeChart(db) {
+        Highcharts.setOptions({
+            lang: {numericSymbols: [ 'K' , 'M' , 'B' , 'T' , 'P' , 'E'] }
+        });
         Highcharts.stockChart('total-volumes', {
             chart: {
                 type: 'column'
@@ -72,9 +75,7 @@ jQuery(document).ready(function($) {
                 data: db 
             }],
             yAxis: {
-                offset: 20,
-                min: 0,
-                max: 10000000000
+                offset: 20
             },
             xAxis: {
                 type: 'datetime'
