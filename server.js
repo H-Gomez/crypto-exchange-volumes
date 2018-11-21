@@ -46,20 +46,17 @@ function totalVolumes(req, res, next) {
                 );
             }
 
-            req.todayTotalVolume = formatCurrency(result[0].volume);
+            req.todayTotalVolume = formatCurrency(result[result.length - 1].volume);
             req.totalVolumes = formatTotalVolumes(result);
             next();
         });
-};
+}
 
 function formatTotalVolumes(volumes) {
     let arr = [];
-    volumes.forEach((item) => {
-        arr.push([
-            item.date,
-            item.volume
-        ])
-    })
+    volumes.forEach(item => {
+        arr.push([item.date, item.volume]);
+    });
 
     return arr;
 }
@@ -71,7 +68,8 @@ function formatCurrency(number) {
     for (var i = roundings.length - 1; i >= 0; i--) {
         let size = Math.pow(10, (i + 1) * 3);
         if (size <= number) {
-            number = Math.round((number * decimalPlaces) / size) / decimalPlaces;
+            number =
+                Math.round((number * decimalPlaces) / size) / decimalPlaces;
             number += roundings[i];
             break;
         }
@@ -84,7 +82,7 @@ function formatCurrency(number) {
 // Routes
 // ---------------------------
 app.get('/', (req, res) => {
-    res.render('index', { 
+    res.render('index', {
         todayTotalVolume: req.todayTotalVolume,
         totalVolumes: JSON.stringify(req.totalVolumes)
     });
@@ -106,8 +104,6 @@ app.get('/charts/all', (req, res) => {
 app.get('/volumes/total', (req, res) => {
     res.send(req.totalVolumes);
 });
-
-
 
 //
 // 404 Route

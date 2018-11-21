@@ -97,7 +97,7 @@ module.exports = {
                     tradeVolumes.push(arr);
                 } else {
                     console.log(
-                        'The volume property is missing from the dataset'
+                        `The volume property is missing from the dataset: ${item.name}`
                     );
                 }
             });
