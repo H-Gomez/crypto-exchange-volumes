@@ -37,7 +37,7 @@ MongoClient.connect(
 
 /**
  * Middleware function that gets the total volumes from the database and performs
- * a number of tasks against it such as calculate total and differences.
+ * a number of tasks against it such as calculate total
  * @param {*} req 
  * @param {*} res 
  * @param {*} next 
@@ -113,11 +113,11 @@ function calculateVolumeChange(dataset, days) {
 // ---------------------------
 app.get('/', (req, res) => {
     res.render('index', {
-        vols: {
+        volumeData: {
             volume1day: req.volume1Day,
             volumeWeek: req.volumeWeek,
+            todayTotalVolume: req.todayTotalVolume,
         },
-        todayTotalVolume: req.todayTotalVolume,
         totalVolumes: JSON.stringify(req.totalVolumes)
     });
 });

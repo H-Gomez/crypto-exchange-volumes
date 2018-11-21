@@ -16,7 +16,7 @@ html
                         div.col-sm-6.col-lg-3
                             div.precontent-item
                                 p 24HR Volume($) 
-                                p $#{todayTotalVolume}
+                                p $#{volumeData.todayTotalVolume}
                         div.col-sm-6.col-lg-3
                             div.precontent-item
                                 p 24HR Volume(B)
@@ -24,11 +24,11 @@ html
                         div.col-sm-6.col-lg-3
                             div.precontent-item
                                 p Change 24HR
-                                p 4.5%
+                                p #{volumeData.volume1day}
                         div.col-sm-6.col-lg-3
                             div.precontent-item
                                 p Change 7 Days
-                                p 5.89%
+                                p #{volumeData.volumeWeek}
         div.row
             div.col-sm-12
                 div#container(style="height: 800px;")
