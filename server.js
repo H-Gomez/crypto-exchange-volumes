@@ -35,6 +35,13 @@ MongoClient.connect(
     }
 );
 
+/**
+ * Middleware function that gets the total volumes from the database and performs
+ * a number of tasks against it such as calculate total and differences.
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 function totalVolumes(req, res, next) {
     database
         .collection('volumeTotal')
@@ -48,10 +55,16 @@ function totalVolumes(req, res, next) {
 
             req.todayTotalVolume = formatCurrency(result[result.length - 1].volume);
             req.totalVolumes = formatTotalVolumes(result);
+            req.volume1Day = calculateVolumeChange(result, 1);
+            req.volumeWeek = calculateVolumeChange(result, 7);
             next();
         });
 }
 
+/**
+ * Creates a new array for the total volumes that doesn't include Mongo IDs.
+ * @param {array} volumes 
+ */
 function formatTotalVolumes(volumes) {
     let arr = [];
     volumes.forEach(item => {
@@ -61,6 +74,10 @@ function formatTotalVolumes(volumes) {
     return arr;
 }
 
+/**
+ * Formats a given number as currency and abbreviates it after rounding.
+ * @param {int} number 
+ */
 function formatCurrency(number) {
     decimalPlaces = 20;
     let roundings = ['K', 'M', 'B', 'T'];
@@ -68,8 +85,7 @@ function formatCurrency(number) {
     for (var i = roundings.length - 1; i >= 0; i--) {
         let size = Math.pow(10, (i + 1) * 3);
         if (size <= number) {
-            number =
-                Math.round((number * decimalPlaces) / size) / decimalPlaces;
+            number = Math.round((number * decimalPlaces) / size) / decimalPlaces;
             number += roundings[i];
             break;
         }
@@ -78,11 +94,29 @@ function formatCurrency(number) {
     return number;
 }
 
+/**
+ * Calculates the percentage change between two values. Takes in the dataset and uses the days
+ * parameter to define which array index to compare to. 
+ * @param {array} dataset 
+ * @param {*} days 
+ */
+function calculateVolumeChange(dataset, days) {
+    let lastVolume = dataset[dataset.length - 1].volume;
+    let compareVolume = dataset[dataset.length - (days + 1)].volume
+    let difference = lastVolume - compareVolume;
+    let result = (difference / compareVolume) * 100.0;
+    return `${result.toFixed(2)}%`;
+}
+
 //
 // Routes
 // ---------------------------
 app.get('/', (req, res) => {
     res.render('index', {
+        vols: {
+            volume1day: req.volume1Day,
+            volumeWeek: req.volumeWeek,
+        },
         todayTotalVolume: req.todayTotalVolume,
         totalVolumes: JSON.stringify(req.totalVolumes)
     });
