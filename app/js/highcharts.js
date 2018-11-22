@@ -47,9 +47,58 @@ jQuery(document).ready(function($) {
     }
 
     function buildVolumeChart(db) {
-        Highcharts.setOptions({
-            lang: { numericSymbols: ['K', 'M', 'B', 'T', 'P', 'E'] }
-        });
+        Highcharts.theme = {
+            "colors": [
+                "#41B5E9",
+                "#FA8832",
+                "#34393C",
+                "#E46151"
+            ],
+            "chart": {
+                "style": {
+                "color": "#333",
+                "fontFamily": "Open Sans"
+                }
+            },
+            "title": {
+                "style": {
+                "fontFamily": "Raleway",
+                "fontWeight": "100"
+                }
+            },
+            "subtitle": {
+                "style": {
+                "fontFamily": "Raleway",
+                "fontWeight": "100"
+                }
+            },
+            "legend": {
+                "align": "right",
+                "verticalAlign": "bottom"
+            },
+            "xAxis": {
+                "gridLineWidth": 0,
+                "gridLineColor": "#F3F3F3",
+                "lineColor": "#F3F3F3",
+                "minorGridLineColor": "#F3F3F3",
+                "tickColor": "#F3F3F3",
+                "tickWidth": 1
+            },
+            "yAxis": {
+                "gridLineDashStyle": "dash",
+                "gridLineColor": "#F3F3F3",
+                "lineColor": "#F3F3F3",
+                "minorGridLineColor": "#F3F3F3",
+                "tickColor": "#F3F3F3",
+                "tickWidth": 1
+            },
+            "lang": { 
+                "numericSymbols": ['K', 'M', 'B', 'T', 'P', 'E'] 
+            }
+        };
+        
+        Highcharts.setOptions(Highcharts.theme);
+
         Highcharts.stockChart('total-volumes', {
             chart: {
                 type: 'column'
@@ -76,6 +125,9 @@ jQuery(document).ready(function($) {
                     data: db
                 }
             ],
+            scrollbar: {
+                enabled: false
+            },
             yAxis: {
                 offset: 20
             },
