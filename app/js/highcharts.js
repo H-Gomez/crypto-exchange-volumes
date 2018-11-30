@@ -48,22 +48,23 @@ jQuery(document).ready(function($) {
 
     function buildVolumeChart(db) {
         Highcharts.theme = {
-            "colors": [
-                "#41B5E9",
-                "#FA8832",
-                "#34393C",
-                "#E46151"
-            ],
+            // "colors": [
+            //     "#41B5E9",
+            //     "#FA8832",
+            //     "#34393C",
+            //     "#E46151"
+            // ],
             "chart": {
                 "style": {
-                "color": "#333",
-                "fontFamily": "Open Sans"
+                    "color": "#333",
+                    "fontFamily": "Open Sans",
+                    "backgroundColor": "#f3f6fc"
                 }
             },
             "title": {
                 "style": {
-                "fontFamily": "Raleway",
-                "fontWeight": "100"
+                    "fontFamily": "Raleway",
+                    "fontWeight": "100"
                 }
             },
             "subtitle": {
@@ -73,7 +74,7 @@ jQuery(document).ready(function($) {
                 }
             },
             "legend": {
-                "align": "right",
+                "align": "left",
                 "verticalAlign": "bottom"
             },
             "xAxis": {
@@ -86,10 +87,10 @@ jQuery(document).ready(function($) {
             },
             "yAxis": {
                 "gridLineDashStyle": "dash",
-                "gridLineColor": "#F3F3F3",
-                "lineColor": "#F3F3F3",
-                "minorGridLineColor": "#F3F3F3",
-                "tickColor": "#F3F3F3",
+                "gridLineColor": "#e0e3e8",
+                "lineColor": "#000000",
+                "minorGridLineColor": "#000000",
+                "tickColor": "#bec2cf",
                 "tickWidth": 1
             },
             "lang": { 
@@ -107,7 +108,8 @@ jQuery(document).ready(function($) {
                 enabled: false
             },
             legend: {
-                enabled: false
+                enabled: false,
+                floating: false
             },
             navigator: {
                 enabled: false
@@ -122,17 +124,32 @@ jQuery(document).ready(function($) {
             },
             series: [
                 {
-                    data: db
+                    data: db,
+                    color: '#8e92f9'
                 }
             ],
             scrollbar: {
                 enabled: false
             },
             yAxis: {
-                offset: 20
+                labels:{
+                    align:'left',
+                    x: 20,
+                    y: 5,
+                    style: {
+                        color: '#bec2cf'
+                    }
+                },
+                lineWidth: 0,
+                offset: 10
             },
             xAxis: {
-                type: 'datetime'
+                type: 'datetime',
+                labels:{
+                    style: {
+                        color: '#bec2cf'
+                    }
+                }
             }
         });
     }

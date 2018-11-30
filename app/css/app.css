@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background: #efefef;
+    background: #fcfdff;
 }
 
 header {
@@ -23,7 +23,8 @@ p {
 }
 
 .precontent-item {
-    text-align: center;
+    text-align: left;
+    padding-left: 0.5em;
 }
 
 .precontent-item p:first-child {
@@ -44,4 +45,11 @@ p {
 
 .highcharts-range-label {
     display: none;
+}
+
+.highcharts-plot-background {
+	fill: #f3f6fc;
+	stroke: #e0e3e8;
+    stroke-width: 1px;
+    border-radius: 4px;
 }
