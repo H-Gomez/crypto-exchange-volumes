@@ -40,9 +40,9 @@ MongoClient.connect(
 /**
  * Middleware function that gets the total volumes from the database and performs
  * a number of tasks against it such as calculate total
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
  */
 function totalVolumes(req, res, next) {
     database
@@ -50,9 +50,7 @@ function totalVolumes(req, res, next) {
         .find()
         .toArray((error, result) => {
             if (error) {
-                return console.log(
-                    `Failed to get total volumes from exchange: ${error}`
-                );
+                return console.log(`Failed to get total volumes from exchange: ${error}`);
             }
 
             req.todayTotalVolume = result[result.length - 1].volume;
@@ -65,7 +63,7 @@ function totalVolumes(req, res, next) {
 
 /**
  * Creates a new array for the total volumes that doesn't include Mongo IDs.
- * @param {array} volumes 
+ * @param {array} volumes
  */
 function formatTotalVolumes(volumes) {
     let arr = [];
@@ -78,7 +76,7 @@ function formatTotalVolumes(volumes) {
 
 /**
  * Formats a given number as currency and abbreviates it after rounding.
- * @param {int} number 
+ * @param {int} number
  */
 function formatCurrency(number) {
     decimalPlaces = 20;
@@ -98,13 +96,13 @@ function formatCurrency(number) {
 
 /**
  * Calculates the percentage change between two values. Takes in the dataset and uses the days
- * parameter to define which array index to compare to. 
- * @param {array} dataset 
- * @param {*} days 
+ * parameter to define which array index to compare to.
+ * @param {array} dataset
+ * @param {*} days
  */
 function calculateVolumeChange(dataset, days) {
     let lastVolume = dataset[dataset.length - 1].volume;
-    let compareVolume = dataset[dataset.length - (days + 1)].volume
+    let compareVolume = dataset[dataset.length - (days + 1)].volume;
     let difference = lastVolume - compareVolume;
     let result = (difference / compareVolume) * 100.0;
     return `${result.toFixed(2)}%`;
@@ -118,7 +116,7 @@ app.get('/', (req, res) => {
         volumeData: {
             volume1day: req.volume1Day,
             volumeWeek: req.volumeWeek,
-            todayTotalVolume: formatCurrency(req.todayTotalVolume),
+            todayTotalVolume: formatCurrency(req.todayTotalVolume)
         },
         btcVolume: formatCurrency(req.todayTotalVolume / req.bitcoinPrice)
     });
