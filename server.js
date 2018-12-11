@@ -3,6 +3,7 @@ const path = require('path');
 const mongodb = require('mongodb');
 const charts = require('./app/js/charts');
 const config = require('./config/database');
+const prices = require('./lib/prices');
 let database;
 
 // Express app setup
@@ -16,6 +17,7 @@ app.set('port', port);
 // ---------------------------
 app.use(express.static(__dirname + '/app'));
 app.use(totalVolumes);
+app.use(prices.getTickerPrices);
 app.set('views', path.join(__dirname, '/app/views'));
 app.set('view engine', 'jade');
 
@@ -53,7 +55,7 @@ function totalVolumes(req, res, next) {
                 );
             }
 
-            req.todayTotalVolume = formatCurrency(result[result.length - 1].volume);
+            req.todayTotalVolume = result[result.length - 1].volume;
             req.totalVolumes = formatTotalVolumes(result);
             req.volume1Day = calculateVolumeChange(result, 1);
             req.volumeWeek = calculateVolumeChange(result, 7);
@@ -116,9 +118,9 @@ app.get('/', (req, res) => {
         volumeData: {
             volume1day: req.volume1Day,
             volumeWeek: req.volumeWeek,
-            todayTotalVolume: req.todayTotalVolume,
+            todayTotalVolume: formatCurrency(req.todayTotalVolume),
         },
-        totalVolumes: JSON.stringify(req.totalVolumes)
+        btcVolume: formatCurrency(req.todayTotalVolume / req.bitcoinPrice)
     });
 });
 
