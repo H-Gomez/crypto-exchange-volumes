@@ -34,10 +34,27 @@ jQuery(document).ready(function($) {
             },
             series: chartData,
             yAxis: {
-                offset: 20
+                labels:{
+                    align:'left',
+                    x: 20,
+                    y: 5,
+                    style: {
+                        color: '#bec2cf'
+                    },
+                    formatter: function() {
+                        return this.value+"%";
+                    },
+                },
+                lineWidth: 0,
+                offset: 10
             },
             xAxis: {
-                type: 'datetime'
+                type: 'datetime',
+                labels: {
+                    style: {
+                        color: '#bec2cf'
+                    }
+                }
             },
             legend: {
                 enabled: true
