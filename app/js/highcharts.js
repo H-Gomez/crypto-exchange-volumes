@@ -33,6 +33,18 @@ jQuery(document).ready(function($) {
                 }
             },
             series: chartData,
+            colors: [
+                "#8e92f9",
+                "#5a67b9",
+                "#C4ADFF",
+                "#9291EB",
+                "#A0B7FF",
+                "#7f5ab9",
+                "#E46151",
+                "#f77474",
+                "#da415d",
+                "#e7adff"
+            ],
             yAxis: {
                 labels:{
                     align:'left',
