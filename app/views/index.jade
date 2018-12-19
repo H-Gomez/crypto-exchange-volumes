@@ -9,32 +9,38 @@ html
         div.container
             h4 Crypto Volumes       
     div.container
-        div.row
-            div.col-sm-12
-                div.precontent
-                    div.row
-                        div.col-sm-6.col-lg-3
-                            div.precontent-item
-                                p 24HR Volume($) 
-                                p $#{volumeData.todayTotalVolume}
-                        div.col-sm-6.col-lg-3
-                            div.precontent-item
-                                p 24HR Volume(B)
-                                p #{btcVolume}
-                        div.col-sm-6.col-lg-3
-                            div.precontent-item
-                                p Change 24HR
-                                p #{volumeData.volume1day}
-                        div.col-sm-6.col-lg-3
-                            div.precontent-item
-                                p Change 7 Days
-                                p #{volumeData.volumeWeek}
+        - if (volumeData)
+            div.row
+                div.col-sm-12
+                    div.precontent
+                        div.row
+                            div.col-sm-6.col-lg-3
+                                div.precontent-item
+                                    p 24HR Volume($) 
+                                    p $#{volumeData.todayTotalVolume}
+                            div.col-sm-6.col-lg-3
+                                div.precontent-item
+                                    p 24HR Volume(B)
+                                    p #{btcVolume}
+                            div.col-sm-6.col-lg-3
+                                div.precontent-item
+                                    p Change 24HR
+                                    p #{volumeData.volume1day}
+                            div.col-sm-6.col-lg-3
+                                div.precontent-item
+                                    p Change 7 Days
+                                    p #{volumeData.volumeWeek}
+        - else 
+            p Unable to load the volume data
+
+        h4 Total Volume
         div.row
             div.col-sm-12
                 div#total-volumes(style="height: 400px;")
         
         br
 
+        h4 Top 10 Exchanges Volume Share
         div.row
             div.col-sm-12
                 div#container(style="height: 600px;")

@@ -96,9 +96,9 @@ function formatCurrency(number) {
 
 /**
  * Calculates the percentage change between two values. Takes in the dataset and uses the days
- * parameter to define which array index to compare to.
- * @param {array} dataset
- * @param {*} days
+ * parameter to define which array index to compare to. 
+ * @param {array} dataset 
+ * @param {number} days 
  */
 function calculateVolumeChange(dataset, days) {
     let lastVolume = dataset[dataset.length - 1].volume;
