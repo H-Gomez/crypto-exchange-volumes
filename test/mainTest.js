@@ -10,15 +10,8 @@ describe('Sanitise A String To Number', function() {
     });
 });
 
-describe('Add Volumes To Database', function() {
-    it('Should connect to the database and add to its volumes', function() {
-        assert.equal();
-    });
-});
-
 describe('Connect To The Database', function() {
     it('Should be able to establish a connection to the database', function() {
         let result = database.connectToDatabase();
-        
     });
 });

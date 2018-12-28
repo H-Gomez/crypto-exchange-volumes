@@ -76,7 +76,7 @@ function formatTotalVolumes(volumes) {
 
 /**
  * Formats a given number as currency and abbreviates it after rounding.
- * @param {int} number
+ * @param {number} number
  */
 function formatCurrency(number) {
     decimalPlaces = 20;
