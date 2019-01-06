@@ -57,6 +57,7 @@ function totalVolumes(req, res, next) {
             req.totalVolumes = formatTotalVolumes(result);
             req.volume1Day = calculateVolumeChange(result, 1);
             req.volumeWeek = calculateVolumeChange(result, 7);
+            req.volumeMonth = calculateVolumeChange(result, 30);
             next();
         });
 }
@@ -116,6 +117,7 @@ app.get('/', (req, res) => {
         volumeData: {
             volume1day: req.volume1Day,
             volumeWeek: req.volumeWeek,
+            volumeMonth: req.volumeMonth,
             todayTotalVolume: formatCurrency(req.todayTotalVolume)
         },
         btcVolume: formatCurrency(req.todayTotalVolume / req.bitcoinPrice)

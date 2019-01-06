@@ -4,7 +4,7 @@
   "description": "Get the exchange volumes for crypto exchanges and plots them locally",
   "main": "main.js",
   "scripts": {
-    "start": "npm test && nodemon server.js",
+    "start": "nodemon server.js",
     "test": "mocha || true"
   },
   "author": "Harvey Gomez",
