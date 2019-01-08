@@ -58,6 +58,7 @@ function totalVolumes(req, res, next) {
             req.volume1Day = calculateVolumeChange(result, 1);
             req.volumeWeek = calculateVolumeChange(result, 7);
             req.volumeMonth = calculateVolumeChange(result, 30);
+            req.monthTotalVolume = combineVolumes(result, 30)
             next();
         });
 }
@@ -73,11 +74,17 @@ function combineVolumes(dataset, count) {
         return;
     }
 
-    //var sum = [1, 2, 3].reduce((a, b) => a + b, 0);
-    var total = dataset.reduce(function(a, b) {
-        a + b;
-    }, 0);
+    var total = 0;
 
+    for (var i = 0; i < count; i++) {
+        if (dataset[i].volume === NaN) {
+            return;
+        }
+        //console.log(dataset[i].volume);
+        console.log(dataset[i].volume);
+        total += dataset[i].volume;
+    }
+    console.log(total);
     return total;
 }
 
@@ -137,7 +144,8 @@ app.get('/', (req, res) => {
             volume1day: req.volume1Day,
             volumeWeek: req.volumeWeek,
             volumeMonth: req.volumeMonth,
-            todayTotalVolume: formatCurrency(req.todayTotalVolume)
+            todayTotalVolume: formatCurrency(req.todayTotalVolume),
+            monthTotalVolume: formatCurrency(req.monthTotalVolume)
         },
         btcVolume: formatCurrency(req.todayTotalVolume / req.bitcoinPrice)
     });
