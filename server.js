@@ -63,6 +63,25 @@ function totalVolumes(req, res, next) {
 }
 
 /**
+ * Calculates the sums of values in an array of numbers. Uses count to determine 
+ * what length of the array to use. 
+ * @param {array} dataset 
+ * @param {number} count 
+ */
+function combineVolumes(dataset, count) {
+    if (count > dataset.length) {
+        return;
+    }
+
+    //var sum = [1, 2, 3].reduce((a, b) => a + b, 0);
+    var total = dataset.reduce(function(a, b) {
+        a + b;
+    }, 0);
+
+    return total;
+}
+
+/**
  * Creates a new array for the total volumes that doesn't include Mongo IDs.
  * @param {array} volumes
  */
@@ -97,9 +116,9 @@ function formatCurrency(number) {
 
 /**
  * Calculates the percentage change between two values. Takes in the dataset and uses the days
- * parameter to define which array index to compare to. 
- * @param {array} dataset 
- * @param {number} days 
+ * parameter to define which array index to compare to.
+ * @param {array} dataset
+ * @param {number} days
  */
 function calculateVolumeChange(dataset, days) {
     let lastVolume = dataset[dataset.length - 1].volume;
