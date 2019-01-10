@@ -80,12 +80,20 @@ function combineVolumes(dataset, count) {
         if (dataset[i].volume === NaN) {
             return;
         }
-        //console.log(dataset[i].volume);
-        console.log(dataset[i].volume);
+        
         total += dataset[i].volume;
     }
-    console.log(total);
+    
     return total;
+}
+
+/**
+ * Calculates the average from a given value based on the length (number of items)
+ * @param {number} value 
+ * @param {number} length 
+ */
+function calculateAverage(value, length) {
+    return value / length;
 }
 
 /**
