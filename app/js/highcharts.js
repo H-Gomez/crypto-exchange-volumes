@@ -1,24 +1,24 @@
 jQuery(document).ready(function($) {
     $.ajax({
         datatype: 'json',
-        url: 'http://localhost:3000/charts/all'
-    })
-        .done(function(response) {
-            buildCharts(response);
-        })
-        .fail(function() {
-            console.log('Ajax failed to get chart data');
-        });
-
-    $.ajax({
-        datatype: 'json',
-        url: 'http://localhost:3000/volumes/total'
+        url: window.location.origin + '/volumes/total'
     })
         .done(function(response) {
             buildVolumeChart(response);
         })
         .fail(function() {
             console.log('Ajax failed to get volume data');
+        });
+
+    $.ajax({
+        datatype: 'json',
+        url: window.location.origin + 'charts/all'
+    })
+        .done(function(response) {
+            buildCharts(response);
+        })
+        .fail(function() {
+            console.log('Ajax failed to get chart data');
         });
 
     // Move to repsective file
